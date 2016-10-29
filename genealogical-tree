@@ -1,0 +1,110 @@
+%familia paterna
+progenitor(abidias,jose). 
+progenitor(otacilia,jose). 
+progenitor(abidias,antoniocarlos). 
+progenitor(otacilia,antoniocarlos).
+progenitor(otacilia,zilanir).
+progenitor(abidias,zilanir). 
+progenitor(otacilia,antonio).
+progenitor(abidias,antonio). 
+progenitor(otacilia,suely).
+progenitor(abidias,suely). 
+progenitor(antonio, anamara). 
+progenitor(antonio,naiara).    
+progenitor(antonio, debora). 
+progenitor(antonio,milka).
+progenitor(suely, jonh). 
+progenitor(suely,jhonata).
+
+
+%familia materna
+progenitor(angelo, maria). 
+progenitor(tumaza,maria).    
+progenitor(angelo, paulo). 
+progenitor(tumaza, paulo).
+progenitor(angelo, isabel). 
+progenitor(tumaza,isabel).
+progenitor(isabel, nilson). 
+progenitor(isabel, nilton).
+progenitor(isabel, claudio).
+  
+
+%minha familia
+progenitor(maria, gilvan). 
+progenitor(jose,gilvan).    
+progenitor(maria, gerlane). 
+progenitor(jose,gerlane).    
+progenitor(maria, keilane). 
+progenitor(jose,keilane).    
+progenitor(maria, karine). 
+progenitor(jose,karine).    
+
+ 
+
+sexo(otacilia,feminino).
+sexo(zilanir,feminino).
+sexo(suely,feminino).
+sexo(turmaza,feminino).
+sexo(maria, feminino).
+sexo(isabel, feminino).
+sexo(gerlane, feminino).
+sexo(keilane, feminino).
+sexo(karine, feminino).
+sexo(anamara, feminino).
+sexo(naiara, feminino).
+sexo(debora, feminino).
+sexo(milka, feminino).
+
+
+sexo(abidias,masculino).
+sexo(jose,masculino).
+sexo(antoniocarlos,masculino).
+sexo(antonio,masculino).
+sexo(angelo,masculino).
+sexo(paulo,masculino).   
+sexo(gilvan,masculino).  
+sexo(jonh,masculino).   
+sexo(jhonata,masculino).   
+sexo(nilson,masculino).   
+sexo(nilton,masculino).   
+sexo(claudio,masculino).   
+
+
+irma(X,Y):-
+	progenitor(A,X),
+	progenitor(A,Y),
+	X\==Y, sexo(X,feminino).
+
+
+irmao(X,Y):-
+	progenitor(A,X),
+	progenitor(A,Y),
+	X\==Y, sexo(X,masculino).
+
+
+avo(X,Y):- 
+	progenitor(X,A),
+	progenitor(A,Y),
+	sexo(X,masculino).
+
+mae(X,Y):-
+	progenitor(X,Y),
+	sexo(X,feminino).
+
+pai(X,Y):-
+	progenitor(X,Y),
+	sexo(X,masculino).
+
+tio(X,Y):-
+	irmao(X,A),
+	progenitor(A,Y).
+
+tia(X,Y):-
+	irma(X,A),
+	progenitor(A,Y).
+
+primo(X,Y):-
+	irmao(A,B),
+	progenitor(A,X),
+	progenitor(B,Y),
+	X\==Y.
